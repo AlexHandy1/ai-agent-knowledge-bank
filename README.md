@@ -2,7 +2,7 @@
 
 A personal collection of Claude Code and agentic skills I use — a mix of custom ones I've built and links to other resources.
 
-To use any of these, clone the repo and ask Claude to copy and set up the skill in your environment. I expect this to change and evolve significantly as my working patterns evolve with what's possible.
+To use any of these, clone the repo and ask Claude to copy and set up the skill in your environment. I expect this to change significantly as my working patterns evolve with what's possible.
 
 ---
 
