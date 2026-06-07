@@ -22,3 +22,13 @@ To use any of these, clone the repo and ask Claude to copy and set up the skill 
 | skills | [GitHub](https://github.com/mattpocock/skills) | Matt Pocock's collection of Claude Code skills |
 | gstack | [GitHub](https://github.com/garrytan/gstack) | Garry Tan's personal AI development stack and tooling setup |
 | gbrain | [GitHub](https://github.com/garrytan/gbrain) | Garry Tan's gbrain — an architectural pattern for agentic memory and reasoning worth exploring |
+
+## Other helpful resources
+
+| Resource | Description |
+|----------|-------------|
+| [Claude Code Mastery](https://arps18.github.io/posts/claude-code-mastery/) | Practical guide to getting the most out of Claude Code, including a curated list of popular CLAUDE.md files worth studying |
+| [Working with AI](https://eugeneyan.com//writing/working-with-ai/) | Eugene Yan's reflections on day-to-day AI-assisted work — patterns, pitfalls, and how to stay in the driver's seat |
+| [autoresearch](https://github.com/karpathy/autoresearch) | Andrej Karpathy's autonomous research agent — a reference implementation for multi-step agentic research workflows |
+| [Levels of Agentic Engineering](https://www.bassimeledath.com/blog/levels-of-agentic-engineering) | A framework for thinking about how much autonomy to hand to AI agents at different stages of a project |
+| [Agentic Engineering Patterns](https://simonwillison.net/guides/agentic-engineering-patterns/) | Simon Willison's guide to recurring patterns in agentic systems — practical and grounded in real-world experience |
