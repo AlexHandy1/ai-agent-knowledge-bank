@@ -1,5 +1,7 @@
 Start each session by running the /plan-recap skill to understand the project goal and status.
 
+For any new feature or project planning, run /grill-me to stress-test the plan before building. Do not run this when operating autonomously.
+
 For any coding work:
 - Always follow test driven development as outlined in /tdd and /testing.
 - Look for opportunities to validate your own work and get feedback directly. Design and run an end-to-end smoke test or practical validation. For projects involving web UI use the /agent-browser skill to review UIs directly.
@@ -16,6 +18,7 @@ This CLAUDE.md provides the framework. Skills contain the detailed guidance. Loa
 | Skill | Purpose | Load when |
 |-------|---------|-----------|
 | plan-recap | Read planning docs and produce a session briefing | Start of every session |
+| grill-me | Stress-test a plan by interviewing the user | New features or project planning (not autonomous runs) |
 | tdd | RED-GREEN-REFACTOR workflow, recovery strategies | Starting any code work |
 | testing | Test patterns, factories, antipatterns | Starting any code work |
 | agent-browser | Browser automation for reviewing web UIs | Validating web/UI changes |
