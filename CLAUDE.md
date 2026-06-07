@@ -10,6 +10,7 @@ For any coding work:
 	1. Check what's staged: `git status`
 	2. Commit with a descriptive message: `git commit -m "your message"`
 	3. Commit often. Each commit should represent one coherent, working change — not a batch of unrelated edits.
+- For Python projects, always use a virtual environment: `python -m venv venv` if one doesn't exist, then `source venv/bin/activate` before running any `pip install`.
 
 Close each session by running the /summarise-session skill to write up what we did.
 
