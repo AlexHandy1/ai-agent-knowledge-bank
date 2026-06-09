@@ -12,6 +12,8 @@ To use any of these, clone the repo and ask Claude to copy and set up the skill 
 |-------|---------|-------------|
 | [plan-recap](plan-recap/SKILL.md) | `/plan-recap` | Reads planning and work summary docs from the current project and produces a concise session briefing |
 | [summarise-session](summarise-session/SKILL.md) | `/summarise-session` | Reviews the current conversation and writes a structured summary to a `WORK_SUMMARY_DDMMYY.md` file |
+| [daily-summary](daily-summary/SKILL.md) | `/daily-summary` | Pulls today's Granola meeting notes and writes a dated daily summary with consolidated action items |
+| [daily-plan](daily-plan/SKILL.md) | `/daily-plan` | Builds the next working day's `to_do_DDMMYYYY.md` by carrying over unfinished tasks and pulling in meeting actions |
 
 ## External skills I use
 
