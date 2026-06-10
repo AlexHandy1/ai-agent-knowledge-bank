@@ -8,22 +8,7 @@ To use any of these, clone the repo and ask Claude to copy and set up the skill 
 
 ---
 
-## Plugins
-
-[Claude Code plugins](https://claude.com/plugins) are a way to package multiple skills, agents, and workflows together into a single installable unit — useful for shipping opinionated setups for a given domain or workflow.
-
-Plugins I've added:
-
-| Plugin | Description |
-|--------|-------------|
-| [frontend-design](https://claude.com/plugins/frontend-design) | Create distinctive, production-grade frontend interfaces with high design quality |
-| [feature-dev](https://claude.com/plugins/feature-dev) | End-to-end feature development workflow — from spec to working, tested code |
-
-I'm exploring how to package opinionated plugin packs for specific workflows (e.g. data analysis) — bringing together the right skills, agents, and scaffolding in one place.
-
----
-
-## Skills
+## Custom skills
 
 | Skill | Trigger | Description |
 |-------|---------|-------------|
@@ -32,7 +17,7 @@ I'm exploring how to package opinionated plugin packs for specific workflows (e.
 | [daily-summary](daily-summary/SKILL.md) | `/daily-summary` | Pulls today's Granola meeting notes and writes a dated daily summary with consolidated action items |
 | [daily-plan](daily-plan/SKILL.md) | `/daily-plan` | Builds the next working day's `to_do_DDMMYYYY.md` by carrying over unfinished tasks and pulling in meeting actions |
 
-## External skills I use
+## Skills from others
 
 | Skill | Source | Description |
 |-------|--------|-------------|
@@ -41,6 +26,17 @@ I'm exploring how to package opinionated plugin packs for specific workflows (e.
 | skills | [GitHub](https://github.com/mattpocock/skills) | Matt Pocock's collection of Claude Code skills |
 | gstack | [GitHub](https://github.com/garrytan/gstack) | Garry Tan's personal AI development stack and tooling setup |
 | gbrain | [GitHub](https://github.com/garrytan/gbrain) | Garry Tan's gbrain — an architectural pattern for agentic memory and reasoning worth exploring |
+
+## Plugins from others
+
+[Claude Code plugins](https://claude.com/plugins) are a way to package multiple skills, agents, and workflows together into a single installable unit — useful for shipping opinionated setups for a given domain or workflow.
+
+| Plugin | Description |
+|--------|-------------|
+| [frontend-design](https://claude.com/plugins/frontend-design) | Create distinctive, production-grade frontend interfaces with high design quality |
+| [feature-dev](https://claude.com/plugins/feature-dev) | End-to-end feature development workflow — from spec to working, tested code |
+
+I'm exploring how to package opinionated plugin packs for specific workflows (e.g. data analysis) — bringing together the right skills, agents, and scaffolding in one place.
 
 ## Other helpful resources
 
