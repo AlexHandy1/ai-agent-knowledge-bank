@@ -1,6 +1,6 @@
-# AI Agent Skills Bank
+# AI Agent Knowledge Bank
 
-A personal collection of agentic skills and workflows I use — a mix of custom ones I've built and links to other resources.
+A personal collection of agentic skills, workflows, and resources I use — a mix of custom ones I've built and links to other resources.
 
 The skills and scaffolding here are primarily designed around [Claude Code](https://claude.ai/code), though the patterns and ideas are transferable to other agentic setups.
 
@@ -37,6 +37,14 @@ To use any of these, clone the repo and ask Claude to copy and set up the skill 
 | [feature-dev](https://claude.com/plugins/feature-dev) | End-to-end feature development workflow — from spec to working, tested code |
 
 I'm exploring how to package opinionated plugin packs for specific workflows (e.g. data analysis) — bringing together the right skills, agents, and scaffolding in one place.
+
+## Learnings & gotchas
+
+Collection of practical tips I've learnt as I go and gotchas to watch out for. See [LEARNINGS_AND_GOTCHAS.md](LEARNINGS_AND_GOTCHAS.md) for the full list.
+
+| Topic | Summary |
+|-------|---------|
+| [Skills in cloud sessions](LEARNINGS_AND_GOTCHAS.md#skills-are-not-available-in-cloudautonomous-sessions-unless-committed-to-the-repo) | Project-scope your skills if you want them available in cloud-based autonomous sessions — user-level skills live on your machine and won't be cloned |
 
 ## Other helpful resources
 
