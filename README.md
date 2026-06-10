@@ -1,6 +1,8 @@
-# Claude Skills Bank
+# AI Agent Skills Bank
 
-A personal collection of Claude Code and agentic skills I use — a mix of custom ones I've built and links to other resources.
+A personal collection of agentic skills and workflows I use — a mix of custom ones I've built and links to other resources.
+
+The skills and scaffolding here are primarily designed around [Claude Code](https://claude.ai/code), though the patterns and ideas are transferable to other agentic setups.
 
 To use any of these, clone the repo and ask Claude to copy and set up the skill in your environment. I expect this to change significantly as my working patterns evolve with what's possible.
 
