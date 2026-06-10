@@ -8,6 +8,21 @@ To use any of these, clone the repo and ask Claude to copy and set up the skill 
 
 ---
 
+## Plugins
+
+[Claude Code plugins](https://claude.com/plugins) are a way to package multiple skills, agents, and workflows together into a single installable unit — useful for shipping opinionated setups for a given domain or workflow.
+
+Plugins I've added:
+
+| Plugin | Description |
+|--------|-------------|
+| [frontend-design](https://claude.com/plugins/frontend-design) | Create distinctive, production-grade frontend interfaces with high design quality |
+| [feature-dev](https://claude.com/plugins/feature-dev) | End-to-end feature development workflow — from spec to working, tested code |
+
+I'm exploring how to package opinionated plugin packs for specific workflows (e.g. data analysis) — bringing together the right skills, agents, and scaffolding in one place.
+
+---
+
 ## Skills
 
 | Skill | Trigger | Description |
