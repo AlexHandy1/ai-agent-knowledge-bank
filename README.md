@@ -6,13 +6,17 @@ The skills and scaffolding here are primarily designed around [Claude Code](http
 
 ## Install
 
-A subset of the skills and workflows I currently use as outlined in the `CLAUDE.md` file are available to be installed via a plugin (project-scoped, so they're available in cloud/autonomous sessions):
+A subset of the skills and workflows I currently use as outlined in the `CLAUDE.md` file are available to install into any project. Clone this repo, then from your project root run:
 
 ```bash
-claude plugin install github:AlexHandy1/ai-agent-knowledge-bank --scope project
+mkdir -p .claude && cp -r ~/ai-agent-knowledge-bank/skills .claude/ && cp ~/ai-agent-knowledge-bank/CLAUDE.md .
 ```
 
-Then copy `CLAUDE.md` from this repo into your project root to get the full workflow setup.
+> Adjust the path if you cloned the repo somewhere other than `~`.
+
+This copies all skills into your project's `.claude/skills/` directory (so they're available in cloud/autonomous sessions) and drops `CLAUDE.md` at your project root.
+
+> I'm still exploring the best way to package and share this as a proper Claude Code plugin — will update once the workflow has stabilised.
 
 ---
 
