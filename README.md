@@ -32,6 +32,7 @@ This copies all skills into your project's `.claude/skills/` directory (so they'
 | [tdd](skills/tdd/SKILL.md) | `/tdd` | Red-green-refactor TDD workflow with vertical slices | [Matt Pocock](https://github.com/mattpocock/skills) |
 | [testing](skills/testing/SKILL.md) | `/testing` | Test patterns, factories, and anti-patterns for behaviour-driven tests | [Gidi Morris](https://github.com/gmmorris/xp-and-lean-agent-specification) |
 | [agent-browser](skills/agent-browser/SKILL.md) | `/agent-browser` | Browser automation CLI for AI agents via CDP | [Vercel Labs](https://www.skills.sh/vercel-labs/agent-browser/agent-browser) |
+| [documentation-and-adrs](skills/documentation-and-adrs/SKILL.md) | `/documentation-and-adrs` | Records architectural decisions and ensures README exists | [Gidi Morris](https://github.com/gmmorris/xp-and-lean-agent-specification) |
 
 ---
 

@@ -11,6 +11,7 @@ For any coding work:
 	2. Commit with a descriptive message: `git commit -m "your message"`
 	3. Commit often. Each commit should represent one coherent, working change — not a batch of unrelated edits.
 - For Python projects, always use a virtual environment: `python -m venv venv` if one doesn't exist, then `source venv/bin/activate` before running any `pip install`.
+- Follow /documentation-and-adrs when making significant architectural decisions or choosing between competing approaches. If a README.md does not exist at the project root, create one before closing the session.
 
 Close each session by running the /summarise-session skill to write up what we did.
 
@@ -23,4 +24,5 @@ This CLAUDE.md provides the framework. Skills contain the detailed guidance. Loa
 | tdd | RED-GREEN-REFACTOR workflow, recovery strategies | Starting any code work |
 | testing | Test patterns, factories, antipatterns | Starting any code work |
 | agent-browser | Browser automation for reviewing web UIs | Validating web/UI changes |
+| documentation-and-adrs | Record architectural decisions and ensure README exists | Significant technical decisions; end of any session where no README exists |
 | summarise-session | Write a structured session summary to a WORK_SUMMARY file | End of every session |
