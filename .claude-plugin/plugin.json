@@ -1,0 +1,13 @@
+{
+  "name": "ai-agent-knowledge-bank",
+  "version": "0.1.0",
+  "description": "Opinionated workflow skills for Claude Code: session planning, TDD, browser testing, and structured documentation",
+  "author": {
+    "name": "AlexHandy1",
+    "url": "https://github.com/AlexHandy1/ai-agent-knowledge-bank"
+  },
+  "homepage": "https://github.com/AlexHandy1/ai-agent-knowledge-bank",
+  "repository": "https://github.com/AlexHandy1/ai-agent-knowledge-bank",
+  "license": "MIT",
+  "keywords": ["workflow", "tdd", "planning", "sessions", "testing"]
+}

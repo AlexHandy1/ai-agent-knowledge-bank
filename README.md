@@ -4,7 +4,30 @@ A personal collection of agentic skills, workflows, and resources I use — a mi
 
 The skills and scaffolding here are primarily designed around [Claude Code](https://claude.ai/code), though the patterns and ideas are transferable to other agentic setups.
 
-To use any of these, clone the repo and ask Claude to copy and set up the skill in your environment. I expect this to change significantly as my working patterns evolve with what's possible.
+## Install
+
+A subset of the skills and workflows I currently use as outlined in the `CLAUDE.md` file are available to be installed via a plugin (project-scoped, so they're available in cloud/autonomous sessions):
+
+```bash
+claude plugin install github:AlexHandy1/ai-agent-knowledge-bank --scope project
+```
+
+Then copy `CLAUDE.md` from this repo into your project root to get the full workflow setup.
+
+---
+
+## Plugin contents
+
+| Skill | Trigger | Description | Source |
+|-------|---------|-------------|--------|
+| [plan-recap](skills/plan-recap/SKILL.md) | `/plan-recap` | Reads planning docs and produces a concise session briefing | Custom |
+| [summarise-session](skills/summarise-session/SKILL.md) | `/summarise-session` | Writes a structured `WORK_SUMMARY_DDMMYY.md` from the current session | Custom |
+| [daily-summary](skills/daily-summary/SKILL.md) | `/daily-summary` | Pulls Granola meeting notes and writes a dated daily summary with action items | Custom |
+| [daily-plan](skills/daily-plan/SKILL.md) | `/daily-plan` | Builds the next day's `to_do_DDMMYYYY.md` from unfinished tasks and meeting actions | Custom |
+| [grill-me](skills/grill-me/SKILL.md) | `/grill-me` | Stress-tests a plan by interviewing you until reaching shared understanding | [Matt Pocock](https://github.com/mattpocock/skills) |
+| [tdd](skills/tdd/SKILL.md) | `/tdd` | Red-green-refactor TDD workflow with vertical slices | [Matt Pocock](https://github.com/mattpocock/skills) |
+| [testing](skills/testing/SKILL.md) | `/testing` | Test patterns, factories, and anti-patterns for behaviour-driven tests | [Gidi Morris](https://github.com/gmmorris/xp-and-lean-agent-specification) |
+| [agent-browser](skills/agent-browser/SKILL.md) | `/agent-browser` | Browser automation CLI for AI agents via CDP | [Vercel Labs](https://www.skills.sh/vercel-labs/agent-browser/agent-browser) |
 
 ---
 
@@ -12,10 +35,10 @@ To use any of these, clone the repo and ask Claude to copy and set up the skill 
 
 | Skill | Trigger | Description |
 |-------|---------|-------------|
-| [plan-recap](plan-recap/SKILL.md) | `/plan-recap` | Reads planning and work summary docs from the current project and produces a concise session briefing |
-| [summarise-session](summarise-session/SKILL.md) | `/summarise-session` | Reviews the current conversation and writes a structured summary to a `WORK_SUMMARY_DDMMYY.md` file |
-| [daily-summary](daily-summary/SKILL.md) | `/daily-summary` | Pulls today's Granola meeting notes and writes a dated daily summary with consolidated action items |
-| [daily-plan](daily-plan/SKILL.md) | `/daily-plan` | Builds the next working day's `to_do_DDMMYYYY.md` by carrying over unfinished tasks and pulling in meeting actions |
+| [plan-recap](skills/plan-recap/SKILL.md) | `/plan-recap` | Reads planning and work summary docs from the current project and produces a concise session briefing |
+| [summarise-session](skills/summarise-session/SKILL.md) | `/summarise-session` | Reviews the current conversation and writes a structured summary to a `WORK_SUMMARY_DDMMYY.md` file |
+| [daily-summary](skills/daily-summary/SKILL.md) | `/daily-summary` | Pulls today's Granola meeting notes and writes a dated daily summary with consolidated action items |
+| [daily-plan](skills/daily-plan/SKILL.md) | `/daily-plan` | Builds the next working day's `to_do_DDMMYYYY.md` by carrying over unfinished tasks and pulling in meeting actions |
 
 ## Skills from others
 
