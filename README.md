@@ -73,6 +73,7 @@ Collection of practical tips I've learnt as I go and gotchas to watch out for. S
 | Topic | Summary |
 |-------|---------|
 | [Skills in cloud sessions](LEARNINGS_AND_GOTCHAS.md#skills-are-not-available-in-cloudautonomous-sessions-unless-committed-to-the-repo) | Project-scope your skills if you want them available in cloud-based autonomous sessions — user-level skills live on your machine and won't be cloned |
+| [Private repo access for Claude Code web](LEARNINGS_AND_GOTCHAS.md#granting-claude-code-web-access-to-a-private-github-repo) | OAuth connection alone isn't enough — you must also grant access via https://github.com/apps/claude/installations/select_target |
 
 ## Other helpful resources
 
