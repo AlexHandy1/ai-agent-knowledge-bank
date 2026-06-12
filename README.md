@@ -20,7 +20,7 @@ This copies all skills into your project's `.claude/skills/` directory (so they'
 
 ---
 
-## Plugin contents
+## Install contents
 
 | Skill | Trigger | Description | Source |
 |-------|---------|-------------|--------|
