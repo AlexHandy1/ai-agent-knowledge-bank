@@ -30,6 +30,34 @@ The "skills you enable on claude.ai are loaded automatically" note is worth expl
 
 ---
 
+## Agent SDK billing is moving to plan-based (from June 15 2025)
+
+Until mid-June 2025 the recommended pattern for using Claude agents in cloud/remote setups was to authenticate with a separate, directly-billed API key — which meant a mixed pattern: API key in cloud, Claude plan locally.
+
+From 15 June 2025 onwards you can use your existing Claude plan to authenticate the Agent SDK, removing the need for a separate API key. This applies to both Claude Code agents and Anthropic SDK-based agents.
+
+**Reference:** [Use the Claude Agent SDK with your Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan)
+
+**Practical implication:** If you currently use a mixed authentication pattern, migrate to plan-based auth once the rollout lands so local and cloud sessions behave consistently.
+
+---
+
+## Visual browser review is not available in Claude Code web
+
+The `/agent-browser` skill (and any Chrome-based validation) does not work in Claude Code web sessions. Chrome downloads are blocked by the environment's network policy, so UI checks must be done via other means (e.g. `TestClient`, `curl`, or manual inspection).
+
+**Practical implication:** If your workflow relies on `agent-browser` for automated UI validation, run those sessions locally in the desktop/CLI app rather than through claude.ai/code.
+
+---
+
+## Fable 5 is capable enough to build non-trivial apps end-to-end in a single session
+
+First experiment with Fable 5: built a personal wiki (inspired by [karpathy's reading-list gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) and [rohitg00's wiki gist](https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2)) from ~500 historic articles in ~10 minutes. The output included a fully functional update system and a browsable front-end — no hand-holding required.
+
+**Practical implication:** Fable 5 is worth reaching for on ambitious single-session builds.
+
+---
+
 ## Granting Claude Code web access to a private GitHub repo
 
 When connecting a private repo to Claude Code web, the GitHub OAuth connection alone is not enough. You also need to explicitly grant the Claude GitHub app access to the specific repo.

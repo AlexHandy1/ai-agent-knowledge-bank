@@ -74,6 +74,9 @@ Collection of practical tips I've learnt as I go and gotchas to watch out for. S
 |-------|---------|
 | [Skills in cloud sessions](LEARNINGS_AND_GOTCHAS.md#skills-are-not-available-in-cloudautonomous-sessions-unless-committed-to-the-repo) | Project-scope your skills if you want them available in cloud-based autonomous sessions — user-level skills live on your machine and won't be cloned |
 | [Private repo access for Claude Code web](LEARNINGS_AND_GOTCHAS.md#granting-claude-code-web-access-to-a-private-github-repo) | OAuth connection alone isn't enough — you must also grant access via https://github.com/apps/claude/installations/select_target |
+| [Agent SDK billing moves to plan-based (June 2025)](LEARNINGS_AND_GOTCHAS.md#agent-sdk-billing-is-moving-to-plan-based-from-june-15-2025) | From 15 Jun 2025 you can use your Claude plan instead of a separate API key for cloud agents — migrate to get a consistent local/cloud auth pattern |
+| [No visual browser review in Claude Code web](LEARNINGS_AND_GOTCHAS.md#visual-browser-review-is-not-available-in-claude-code-web) | Chrome/agent-browser is blocked in the web environment — do UI validation locally in the CLI or desktop app instead |
+| [Fable 5 can build non-trivial apps end-to-end in one session](LEARNINGS_AND_GOTCHAS.md#fable-5-is-capable-enough-to-build-non-trivial-apps-end-to-end-in-a-single-session) | Built a fully functional personal wiki from ~500 articles in ~10 mins |
 
 ## Other helpful resources
 
