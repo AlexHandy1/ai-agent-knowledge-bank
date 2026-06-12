@@ -27,3 +27,13 @@ Anything in the cloned repo is available, including:
 - If you want skills available across cloud tasks, commit them into each repo's `.claude/` directory, or enable them on claude.ai itself (skills enabled on claude.ai are loaded into cloud sessions automatically)
 
 The "skills you enable on claude.ai are loaded automatically" note is worth exploring as a way to make your skills available without committing them to every repo.
+
+---
+
+## Granting Claude Code web access to a private GitHub repo
+
+When connecting a private repo to Claude Code web, the GitHub OAuth connection alone is not enough. You also need to explicitly grant the Claude GitHub app access to the specific repo.
+
+Go to: **https://github.com/apps/claude/installations/select_target**
+
+After 2FA, you can select which repositories the Claude app can access. Add the private repo there and it will become available to Claude Code web sessions.
