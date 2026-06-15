@@ -74,7 +74,7 @@ Autonomous sessions consume tokens faster than interactive ones for two reasons:
 
 Task budgets exist as a partial mitigation — they allow setting token ceilings — but are scoped to the API and not available on the Claude plan: https://platform.claude.com/docs/en/build-with-claude/task-budgets
 
-**Practical implication:** Treat autonomous runs as a higher-cost mode by default. Set conservative scope and be even more explicit about what the agent should *not* do before launching.
+**Practical implication:** Treat autonomous runs as a higher-cost mode by default. Set conservative scope, be explicit about what the agent should *not* do, and consider defining a stopping condition for more open-ended tasks. In-process budget awareness is an open area: injecting a token/time budget into the system prompt and asking the agent to self-report at a threshold is one low-tech approach worth exploring.
 
 ---
 
@@ -93,3 +93,11 @@ There is currently no tooling to tell you which combination a task warrants befo
 Two related gaps: (1) there is no way to estimate what a task will cost before running it; (2) there is no mapping from estimated cost to plan tier limits, so you cannot answer "will this task be possible within my limits?" without just trying.
 
 This is an area actively under investigation. One interesting early approach is collecting usage and cost data post-session to build up predictions over time: https://github.com/CodeSarthak/tarmac
+
+---
+
+## Write incrementally on longer tasks to survive budget limits
+
+Until better cost/limit controls exist, structure longer autonomous tasks to commit or checkpoint work frequently rather than accumulating everything in memory until the end. If the session hits a budget ceiling mid-task, incremental commits mean you have recoverable progress to build from rather than starting over.
+
+A related pattern in Claude Code web: instruct the agent to pause before it expects to hit limits and raise a PR with whatever is complete. This gets work out of the session and into a reviewable state before the session is blocked, and gives a clean handoff point for continuing in a new session.
