@@ -65,3 +65,31 @@ When connecting a private repo to Claude Code web, the GitHub OAuth connection a
 Go to: **https://github.com/apps/claude/installations/select_target**
 
 After 2FA, you can select which repositories the Claude app can access. Add the private repo there and it will become available to Claude Code web sessions.
+
+---
+
+## Autonomous sessions are structurally more token-hungry than interactive ones
+
+Autonomous sessions consume tokens faster than interactive ones for two reasons: the model has no human checkpoints to catch and halt wasteful trajectories, and it appears to more readily spawn greater multiples of parallel sub-agent paths, so consumption compounds quickly.
+
+Task budgets exist as a partial mitigation — they allow setting token ceilings — but are scoped to the API and not available on the Claude plan: https://platform.claude.com/docs/en/build-with-claude/task-budgets
+
+**Practical implication:** Treat autonomous runs as a higher-cost mode by default. Set conservative scope and be even more explicit about what the agent should *not* do before launching.
+
+---
+
+## Model and effort level compound significantly on longer tasks
+
+The combination of model tier and effort level creates a very wide cost range. Choosing Opus at `/xhigh` vs Sonnet at `/low` for the same task can produce radically different token consumption. This is particularly significant on long-running tasks where that multiplier applies across many calls.
+
+There is currently no tooling to tell you which combination a task warrants before you run it, and no transparency into how different combinations map to tiered plan limits. Empirical experiments are needed to build intuition.
+
+**Practical implication:** Default to a conservative model/effort combination and escalate only if quality is demonstrably insufficient.
+
+---
+
+## Significant gap in pre-task cost visibility
+
+Two related gaps: (1) there is no way to estimate what a task will cost before running it; (2) there is no mapping from estimated cost to plan tier limits, so you cannot answer "will this task be possible within my limits?" without just trying.
+
+This is an area actively under investigation. One interesting early approach is collecting usage and cost data post-session to build up predictions over time: https://github.com/CodeSarthak/tarmac
