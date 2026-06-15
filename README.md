@@ -77,6 +77,9 @@ Collection of practical tips I've learnt as I go and gotchas to watch out for. S
 | [Agent SDK billing moves to plan-based (June 2025)](LEARNINGS_AND_GOTCHAS.md#agent-sdk-billing-is-moving-to-plan-based-from-june-15-2025) | From 15 Jun 2025 you can use your Claude plan instead of a separate API key for cloud agents — migrate to get a consistent local/cloud auth pattern |
 | [No visual browser review in Claude Code web](LEARNINGS_AND_GOTCHAS.md#visual-browser-review-is-not-available-in-claude-code-web) | Chrome/agent-browser is blocked in the web environment — do UI validation locally in the CLI or desktop app instead |
 | [Fable 5 can build non-trivial apps end-to-end in one session](LEARNINGS_AND_GOTCHAS.md#fable-5-is-capable-enough-to-build-non-trivial-apps-end-to-end-in-a-single-session) | Built a fully functional personal wiki from ~500 articles in ~10 mins |
+| [Autonomous sessions are structurally more token-hungry](LEARNINGS_AND_GOTCHAS.md#autonomous-sessions-are-structurally-more-token-hungry-than-interactive-ones) | No human checkpoints + greater parallel sub-agent spawning means consumption compounds fast — set conservative scope and be even more explicit about what not to do |
+| [Model and effort level compound on longer tasks](LEARNINGS_AND_GOTCHAS.md#model-and-effort-level-compound-significantly-on-longer-tasks) | Opus/xhigh vs Sonnet/low creates a very wide cost range with no pre-task tooling to guide the choice — default conservative and escalate only if quality is insufficient |
+| [Significant gap in pre-task cost visibility](LEARNINGS_AND_GOTCHAS.md#significant-gap-in-pre-task-cost-visibility) | No way to estimate cost or whether a task fits within plan limits before running — actively investigating; early approach using post-session data to build predictions: github.com/CodeSarthak/tarmac |
 
 ## Other helpful resources
 
