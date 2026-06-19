@@ -96,6 +96,20 @@ This is an area actively under investigation. One interesting early approach is 
 
 ---
 
+## TDD and testing patterns are not yet reliable for autonomous sessions
+
+TDD and testing pattern adherence is patchy in practice. Common gaps observed:
+
+- Rarely runs one test at a time in a true red-green cycle — tends to write several tests then implement, or implement first and backfill tests
+- Will not independently design repeatable integration or smoke tests without being asked
+- For front-end changes especially, test-first discipline is unlikely to emerge without explicit prompting
+
+**What does work well:** When the `/agent-browser` skill is loaded with guidance to validate post-build, it reliably runs through visual validation autonomously — browsing, navigating, screenshotting, and reading the result. This closes the development loop effectively even without formal tests.
+
+**Practical implication:** Do not rely on autonomous sessions to self-enforce TDD rigour. Continue to investigate what guardrails and harness adjustments (CLAUDE.md instructions, hooks, skill updates) are needed to make this work more consistently before using in higher-stakes autonomous workflows.
+
+---
+
 ## Write incrementally on longer tasks to survive budget limits
 
 Until better cost/limit controls exist, structure longer autonomous tasks to commit or checkpoint work frequently rather than accumulating everything in memory until the end. If the session hits a budget ceiling mid-task, incremental commits mean you have recoverable progress to build from rather than starting over.
