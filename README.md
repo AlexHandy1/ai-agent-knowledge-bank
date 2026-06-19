@@ -81,6 +81,7 @@ Collection of practical tips I've learnt as I go and gotchas to watch out for. S
 | [Model and effort level compound on longer tasks](LEARNINGS_AND_GOTCHAS.md#model-and-effort-level-compound-significantly-on-longer-tasks) | Opus/xhigh vs Sonnet/low creates a very wide cost range with no pre-task tooling to guide the choice — default conservative and escalate only if quality is insufficient |
 | [Significant gap in pre-task cost visibility](LEARNINGS_AND_GOTCHAS.md#significant-gap-in-pre-task-cost-visibility) | No way to estimate cost or whether a task fits within plan limits before running — actively investigating; early approach using post-session data to build predictions: github.com/CodeSarthak/tarmac |
 | [Write incrementally on longer tasks](LEARNINGS_AND_GOTCHAS.md#write-incrementally-on-longer-tasks-to-survive-budget-limits) | Commit work frequently so budget limits leave you with recoverable checkpoints — in Claude Code web, instruct the agent to raise a PR before it expects to hit limits |
+| [TDD and testing patterns not yet reliable for autonomous sessions](LEARNINGS_AND_GOTCHAS.md#tdd-and-testing-patterns-are-not-yet-reliable-for-autonomous-sessions) | TDD adherence is patchy without explicit prompting — especially for front-end changes. agent-browser post-build visual validation is the reliable fallback. Continue investigating guardrails needed for higher-stakes autonomous workflows |
 
 ## Other helpful resources
 
