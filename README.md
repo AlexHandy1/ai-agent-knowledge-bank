@@ -82,6 +82,7 @@ Collection of practical tips I've learnt as I go and gotchas to watch out for. S
 | [Significant gap in pre-task cost visibility](LEARNINGS_AND_GOTCHAS.md#significant-gap-in-pre-task-cost-visibility) | No way to estimate cost or whether a task fits within plan limits before running — actively investigating; early approach using post-session data to build predictions: github.com/CodeSarthak/tarmac |
 | [Write incrementally on longer tasks](LEARNINGS_AND_GOTCHAS.md#write-incrementally-on-longer-tasks-to-survive-budget-limits) | Commit work frequently so budget limits leave you with recoverable checkpoints — in Claude Code web, instruct the agent to raise a PR before it expects to hit limits |
 | [TDD and testing patterns not yet reliable for autonomous sessions](LEARNINGS_AND_GOTCHAS.md#tdd-and-testing-patterns-are-not-yet-reliable-for-autonomous-sessions) | TDD adherence is patchy without explicit prompting — especially for front-end changes. agent-browser post-build visual validation is the reliable fallback. Continue investigating guardrails needed for higher-stakes autonomous workflows |
+| [Architecture and docs files often skipped without explicit instruction](LEARNINGS_AND_GOTCHAS.md#architecture-and-documentation-files-are-often-skipped-without-explicit-instruction) | Agents skip ARCHITECTURE*.md and README files unless explicitly told to read them — adding a dedicated CLAUDE.md instruction appears to fix this; warrants further experimentation |
 
 ## Other helpful resources
 

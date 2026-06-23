@@ -115,3 +115,15 @@ TDD and testing pattern adherence is patchy in practice. Common gaps observed:
 Until better cost/limit controls exist, structure longer autonomous tasks to commit or checkpoint work frequently rather than accumulating everything in memory until the end. If the session hits a budget ceiling mid-task, incremental commits mean you have recoverable progress to build from rather than starting over.
 
 A related pattern in Claude Code web: instruct the agent to pause before it expects to hit limits and raise a PR with whatever is complete. This gets work out of the session and into a reviewable state before the session is blocked, and gives a clean handoff point for continuing in a new session.
+
+---
+
+## Architecture and documentation files are often skipped without explicit instruction
+
+Observed that agents will frequently skip reading `ARCHITECTURE*.md` and `README` files even when they are present and clearly relevant — they proceed straight to coding without building an understanding of the system first. This leads to changes that miss important context or contradict documented decisions.
+
+**Practical fix:** Be maximally explicit in `CLAUDE.md`. Adding a dedicated instruction — "Always look for and read any ARCHITECTURE*.md files or README files across the project (including in subdirectories and modules) — make sure you review documentation and understand the codebase before you proceed" — appears to address this in initial testing.
+
+**Status:** Anecdotal testing supports the fix working, but this warrants more systematic experimentation to confirm reliability across different task types and session modes.
+
+**Related:** [[CLAUDE.md architecture reading instruction]]
