@@ -2,7 +2,7 @@
 
 A personal collection of agentic skills, workflows, and resources I use — a mix of custom ones I've built and links to other resources.
 
-The skills and scaffolding here are primarily designed around [Claude Code](https://claude.ai/code), though the patterns and ideas are transferable to other agentic setups.
+The skills and scaffolding here are primarily designed around [Claude Code](https://claude.ai/code), though the patterns and ideas are transferable to other agentic setups — I've conducted some tests in [Gemini CLI](https://cloud.google.com/gemini-cli) and [OpenCode](https://opencode.ai).
 
 ## Install
 
@@ -83,6 +83,19 @@ Collection of practical tips I've learnt as I go and gotchas to watch out for. S
 | [Write incrementally on longer tasks](LEARNINGS_AND_GOTCHAS.md#write-incrementally-on-longer-tasks-to-survive-budget-limits) | Commit work frequently so budget limits leave you with recoverable checkpoints — in Claude Code web, instruct the agent to raise a PR before it expects to hit limits |
 | [TDD and testing patterns not yet reliable for autonomous sessions](LEARNINGS_AND_GOTCHAS.md#tdd-and-testing-patterns-are-not-yet-reliable-for-autonomous-sessions) | TDD adherence is patchy without explicit prompting — especially for front-end changes. agent-browser post-build visual validation is the reliable fallback. Continue investigating guardrails needed for higher-stakes autonomous workflows |
 | [Architecture and docs files often skipped without explicit instruction](LEARNINGS_AND_GOTCHAS.md#architecture-and-documentation-files-are-often-skipped-without-explicit-instruction) | Agents skip ARCHITECTURE*.md and README files unless explicitly told to read them — adding a dedicated CLAUDE.md instruction appears to fix this; warrants further experimentation |
+
+## OpenCode
+
+I've started exploring [OpenCode](https://opencode.ai) as an alternative during recent Claude outages.
+
+Not a like-for-like migration from Claude Code, but close out of the box with minimal setup.
+
+| Observation | Detail |
+|-------------|--------|
+| Free models work for basic tasks | Out-of-the-box free models (like Big Pickle) handle simple tasks fine |
+| Permission model defaults to "allow" | You must explicitly set `permission: { "*": "ask" }` in `opencode.json`, otherwise it won't prompt |
+| CLAUDE.md loaded automatically | The project's `CLAUDE.md` is read on every session start — no migration needed |
+| Skills load across projects | Skills in `.claude/skills/` are available via the `skill` tool, not just `/command` triggers |
 
 ## Other helpful resources
 
