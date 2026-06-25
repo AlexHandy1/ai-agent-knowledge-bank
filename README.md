@@ -33,6 +33,7 @@ This copies all skills into your project's `.claude/skills/` directory (so they'
 | [testing](skills/testing/SKILL.md) | `/testing` | Test patterns, factories, and anti-patterns for behaviour-driven tests | [Gidi Morris](https://github.com/gmmorris/xp-and-lean-agent-specification) |
 | [agent-browser](skills/agent-browser/SKILL.md) | `/agent-browser` | Browser automation CLI for AI agents via CDP | [Vercel Labs](https://www.skills.sh/vercel-labs/agent-browser/agent-browser) |
 | [documentation-and-adrs](skills/documentation-and-adrs/SKILL.md) | `/documentation-and-adrs` | Records architectural decisions and ensures README exists | [Gidi Morris](https://github.com/gmmorris/xp-and-lean-agent-specification) |
+| [generating-novel-ideas](skills/generating-novel-ideas/SKILL.md) | `/generating-novel-ideas` | Structured ideation workflow — search process across independent idea pools, analogy transfer, contradiction resolution, and portfolio of finalists with tests | [Tristan Manchester](https://github.com/tristanmanchester/agent-skills/tree/main/generating-novel-ideas) |
 
 ---
 
@@ -52,6 +53,7 @@ This copies all skills into your project's `.claude/skills/` directory (so they'
 | agent-browser | [skills.sh](https://www.skills.sh/vercel-labs/agent-browser/agent-browser) | Browser automation CLI for AI agents — fast, persistent browser control with accessibility-tree snapshots and session management |
 | xp-and-lean-agent-specification | [GitHub](https://github.com/gmmorris/xp-and-lean-agent-specification) | Gidi Morris's XP and lean principles applied to agentic workflows — skills and specifications for structured, disciplined AI-assisted development |
 | skills | [GitHub](https://github.com/mattpocock/skills) | Matt Pocock's collection of Claude Code skills |
+| agent-skills | [GitHub](https://github.com/tristanmanchester/agent-skills) | Tristan Manchester's agent skills — includes `generating-novel-ideas`, a structured ideation workflow that treats idea generation as a search process rather than list-making |
 | gstack | [GitHub](https://github.com/garrytan/gstack) | Garry Tan's personal AI development stack and tooling setup |
 | gbrain | [GitHub](https://github.com/garrytan/gbrain) | Garry Tan's gbrain — an architectural pattern for agentic memory and reasoning worth exploring |
 
