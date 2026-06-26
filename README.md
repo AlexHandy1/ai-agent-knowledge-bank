@@ -18,6 +18,8 @@ This copies all skills into your project's `.claude/skills/` directory (so they'
 
 > I'm still exploring the best way to package and share this as a proper Claude Code plugin — will update once the workflow has stabilised.
 
+For guidance on how to instruct agents to use these skills together, see the [`CLAUDE.md`](CLAUDE.md) file in this repo. It's intentionally generic — adapt it for bespoke project setups by pointing to project-specific architecture docs, conventions, or workflows as needed.
+
 ---
 
 ## Install contents
