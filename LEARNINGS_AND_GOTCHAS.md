@@ -127,3 +127,15 @@ Observed that agents will frequently skip reading `ARCHITECTURE*.md` and `README
 **Status:** Anecdotal testing supports the fix working, but this warrants more systematic experimentation to confirm reliability across different task types and session modes.
 
 **Related:** [[CLAUDE.md architecture reading instruction]]
+
+---
+
+## Claude defaults to writing memory into its own hidden folders rather than project .md files
+
+Observed consistent pattern: when asked to "remember" something or when saving session context, Claude will write to its own internal memory directories (e.g. `~/.claude/projects/.../memory/`) rather than updating visible project documentation like `WORK_SUMMARY*.md` or `LEARNINGS_AND_GOTCHAS.md`.
+
+This is less transparent (files are hidden from normal project navigation), less portable (memory is machine/session scoped), and harder to review or correct. The project `.md` file pattern is preferable: it lives in the repo, is readable by any tool, and is version-controlled.
+
+**Exploring fix:** Adding explicit instruction to `CLAUDE.md` — something like "Do not write to Claude's internal memory folders. Persist session context and learnings by updating project `.md` files directly." — to steer toward the more transparent pattern.
+
+**Status:** Under investigation. Initial hypothesis is that the memory system prompt instructions are strong enough to override project-level `CLAUDE.md` guidance in some cases, which may require a different approach.

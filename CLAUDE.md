@@ -15,6 +15,8 @@ For any coding work:
 - For Python projects, always use a virtual environment: `python -m venv venv` if one doesn't exist, then `source venv/bin/activate` before running any `pip install`.
 - Follow /documentation-and-adrs when making significant architectural decisions or choosing between competing approaches. If a README.md does not exist at the project root, create one before closing the session.
 
+Do not write to Claude's internal memory folders (e.g. `~/.claude/projects/.../memory/`). Persist session context and learnings by updating the relevant `.md` files, as explained in /documentation-and-adrs and /summarise-session.
+
 Close each session by running the /summarise-session skill to write up what we did.
 
 This CLAUDE.md provides the framework. Skills contain the detailed guidance. Load skills based on what you're doing:

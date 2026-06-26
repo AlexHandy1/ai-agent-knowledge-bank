@@ -85,6 +85,7 @@ Collection of practical tips I've learnt as I go and gotchas to watch out for. S
 | [Write incrementally on longer tasks](LEARNINGS_AND_GOTCHAS.md#write-incrementally-on-longer-tasks-to-survive-budget-limits) | Commit work frequently so budget limits leave you with recoverable checkpoints — in Claude Code web, instruct the agent to raise a PR before it expects to hit limits |
 | [TDD and testing patterns not yet reliable for autonomous sessions](LEARNINGS_AND_GOTCHAS.md#tdd-and-testing-patterns-are-not-yet-reliable-for-autonomous-sessions) | TDD adherence is patchy without explicit prompting — especially for front-end changes. agent-browser post-build visual validation is the reliable fallback. Continue investigating guardrails needed for higher-stakes autonomous workflows |
 | [Architecture and docs files often skipped without explicit instruction](LEARNINGS_AND_GOTCHAS.md#architecture-and-documentation-files-are-often-skipped-without-explicit-instruction) | Agents skip ARCHITECTURE*.md and README files unless explicitly told to read them — adding a dedicated CLAUDE.md instruction appears to fix this; warrants further experimentation |
+| [Claude defaults to its own memory folders over project .md files](LEARNINGS_AND_GOTCHAS.md#claude-defaults-to-writing-memory-into-its-own-hidden-folders-rather-than-project-md-files) | Claude consistently writes session context to `~/.claude/projects/.../memory/` rather than visible project docs — less transparent, not version-controlled. Exploring a CLAUDE.md instruction to block this pattern |
 
 ## OpenCode
 
