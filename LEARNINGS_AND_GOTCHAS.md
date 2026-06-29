@@ -136,6 +136,6 @@ Observed consistent pattern: when asked to "remember" something or when saving s
 
 This is less transparent (files are hidden from normal project navigation), less portable (memory is machine/session scoped), and harder to review or correct. The project `.md` file pattern is preferable: it lives in the repo, is readable by any tool, and is version-controlled.
 
-**Exploring fix:** Adding explicit instruction to `CLAUDE.md` — something like "Do not write to Claude's internal memory folders. Persist session context and learnings by updating project `.md` files directly." — to steer toward the more transparent pattern.
+**Fix applied:** Adding explicit instruction to `CLAUDE.md` — "Do not write to Claude's internal memory folders. Persist session context and learnings by updating project `.md` files directly." — steers toward the more transparent pattern.
 
-**Status:** Under investigation. Initial hypothesis is that the memory system prompt instructions are strong enough to override project-level `CLAUDE.md` guidance in some cases, which may require a different approach.
+**Status:** Partial improvement. The `CLAUDE.md` instruction reduces the behaviour but does not eliminate it — occasional edge cases remain where Claude still attempts to write to `memory/` files, particularly when the auto-memory system prompt instructions override project-level guidance. Requires active vigilance and correction when it occurs.
