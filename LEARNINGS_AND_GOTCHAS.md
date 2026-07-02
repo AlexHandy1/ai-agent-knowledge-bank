@@ -139,3 +139,45 @@ This is less transparent (files are hidden from normal project navigation), less
 **Fix applied:** Adding explicit instruction to `CLAUDE.md` — "Do not write to Claude's internal memory folders. Persist session context and learnings by updating project `.md` files directly." — steers toward the more transparent pattern.
 
 **Status:** Partial improvement. The `CLAUDE.md` instruction reduces the behaviour but does not eliminate it — occasional edge cases remain where Claude still attempts to write to `memory/` files, particularly when the auto-memory system prompt instructions override project-level guidance. Requires active vigilance and correction when it occurs.
+
+---
+
+## Refactoring and simplification require intentional triggering
+
+Default tendency is to accumulate technical debt quietly rather than flag or fix it. Common anti-patterns observed:
+
+- Introducing global variables where function parameters would be cleaner and more testable
+- Duplicating logic across similar functions rather than extracting a shared utility
+- Letting design drift accumulate across sessions — each session makes a locally reasonable choice that compounds into a messier architecture over time
+
+This is especially noticeable when a task spans multiple sessions: each session picks up from a working state and adds the minimal change to move forward, without stepping back to look at the whole.
+
+**Practical fixes worth exploring:**
+- Adding a refactor checkpoint to architecture docs — a living list of known debt candidates
+- Integrating a simplification review into the session-close checklist alongside `/summarise-session`
+- Being explicit in `CLAUDE.md` about preferred patterns (e.g. "prefer function parameters over module-level globals in Python scripts")
+- Exploring `/simplify` — a built-in Claude Code skill that runs a cleanup pass on changed code looking for reuse, simplification, and efficiency improvements. Worth testing as a lightweight forcing function after each logical change
+
+**Status:** Active area. The cross-session drift problem in particular warrants more systematic investigation — recording known debt and expected patterns explicitly in architecture docs seems most promising.
+
+---
+
+## Skills as orchestration layer for personal productivity apps
+
+Emerging pattern: using Claude Code skills as the primary orchestration layer for personal productivity systems works well, particularly when:
+
+- The workflow involves multiple steps with human decision points (confirm a value, choose whether to run a follow-on step)
+- Outputs are markdown files that double as logs — easy to review, version-control, and pass to future sessions
+- The same skill can be triggered manually in a session or wired into a recurring schedule
+
+**Strengths:**
+- Low overhead to add new skills once the pattern is established
+- Markdown outputs are human-readable and session-portable
+- Natural fit for scheduling (skill as the scheduled job entrypoint)
+
+**Fragility points still to resolve:**
+- Failure modes are not well-handled: if a step fails mid-skill (e.g. a scrape returns nothing, a DB insert errors), there is no structured recovery path — it surfaces an error and stops, potentially leaving partial state
+- No retries, rollbacks, or structured error logging within a skill run
+- Skill definitions are markdown prose — no type-checking or linting, so schema drift (e.g. a DB column rename) breaks silently until the skill is run
+
+**Status:** Pattern is productive for interactive use. For fully autonomous/scheduled runs, failure handling needs more thought before relying on it for higher-stakes operations.
