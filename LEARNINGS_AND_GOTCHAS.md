@@ -2,6 +2,24 @@
 
 A collection of practical tips I've picked up along the way and gotchas to watch out for.
 
+| Topic | Summary |
+|-------|---------|
+| [Skills in cloud sessions](#skills-are-not-available-in-cloudautonomous-sessions-unless-committed-to-the-repo) | Project-scope your skills if you want them available in cloud-based autonomous sessions — user-level skills live on your machine and won't be cloned |
+| [Private repo access for Claude Code web](#granting-claude-code-web-access-to-a-private-github-repo) | OAuth connection alone isn't enough — you must also grant access via https://github.com/apps/claude/installations/select_target |
+| [Agent SDK billing moves to plan-based (June 2025)](#agent-sdk-billing-is-moving-to-plan-based-from-june-15-2025) | From 15 Jun 2025 you can use your Claude plan instead of a separate API key for cloud agents — migrate to get a consistent local/cloud auth pattern |
+| [No visual browser review in Claude Code web](#visual-browser-review-is-not-available-in-claude-code-web) | Chrome/agent-browser is blocked in the web environment — do UI validation locally in the CLI or desktop app instead |
+| [Fable 5 can build non-trivial apps end-to-end in one session](#fable-5-is-capable-enough-to-build-non-trivial-apps-end-to-end-in-a-single-session) | Built a fully functional personal wiki from ~500 articles in ~10 mins |
+| [Autonomous sessions are structurally more token-hungry](#autonomous-sessions-are-structurally-more-token-hungry-than-interactive-ones) | No human checkpoints + greater parallel sub-agent spawning means consumption compounds fast — set conservative scope and be even more explicit about what not to do |
+| [Model and effort level compound on longer tasks](#model-and-effort-level-compound-significantly-on-longer-tasks) | Opus/xhigh vs Sonnet/low creates a very wide cost range with no pre-task tooling to guide the choice — default conservative and escalate only if quality is insufficient |
+| [Significant gap in pre-task cost visibility](#significant-gap-in-pre-task-cost-visibility) | No way to estimate cost or whether a task fits within plan limits before running — actively investigating; early approach using post-session data to build predictions: github.com/CodeSarthak/tarmac |
+| [Write incrementally on longer tasks](#write-incrementally-on-longer-tasks-to-survive-budget-limits) | Commit work frequently so budget limits leave you with recoverable checkpoints — in Claude Code web, instruct the agent to raise a PR before it expects to hit limits |
+| [TDD and testing patterns not yet reliable for autonomous sessions](#tdd-and-testing-patterns-are-not-yet-reliable-for-autonomous-sessions) | TDD adherence is patchy without explicit prompting — especially for front-end changes. agent-browser post-build visual validation is the reliable fallback |
+| [Architecture and docs files often skipped without explicit instruction](#architecture-and-documentation-files-are-often-skipped-without-explicit-instruction) | Agents skip ARCHITECTURE*.md and README files unless explicitly told to read them — adding a dedicated CLAUDE.md instruction appears to fix this |
+| [Claude defaults to its own memory folders over project .md files](#claude-defaults-to-writing-memory-into-its-own-hidden-folders-rather-than-project-md-files) | Claude consistently writes session context to `~/.claude/projects/.../memory/` rather than visible project docs — less transparent, not version-controlled |
+| [Refactoring and simplification require intentional triggering](#refactoring-and-simplification-require-intentional-triggering) | Agents quietly accumulate debt across sessions — global variables, duplicated logic, design drift. Needs explicit CLAUDE.md patterns and a session-close refactor checkpoint |
+| [Skills as orchestration layer for personal productivity apps](#skills-as-orchestration-layer-for-personal-productivity-apps) | Claude Code skills work well as orchestration for multi-step personal workflows — markdown outputs, schedulable, low overhead to extend. Main fragility: no structured failure handling |
+| [Artifact-design skill for internal technical communication](#artifact-design-skill-for-internal-technical-communication) | Promising early results using /artifact-design to produce polished, self-contained HTML artifacts for communicating technical concepts and designs internally |
+
 ---
 
 ## Skills are not available in cloud/autonomous sessions unless committed to the repo
@@ -181,3 +199,11 @@ Emerging pattern: using Claude Code skills as the primary orchestration layer fo
 - Skill definitions are markdown prose — no type-checking or linting, so schema drift (e.g. a DB column rename) breaks silently until the skill is run
 
 **Status:** Pattern is productive for interactive use. For fully autonomous/scheduled runs, failure handling needs more thought before relying on it for higher-stakes operations.
+
+---
+
+## Artifact-design skill for internal technical communication
+
+Seen some promising early results using the `/artifact-design` skill for generating artifacts to communicate technical concepts and decisions internally — architecture overviews, decision summaries, and similar.
+
+Worth experimenting further with more interactive communication techniques and methods to see how far this pattern can stretch.

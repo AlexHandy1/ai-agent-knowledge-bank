@@ -72,24 +72,7 @@ I'm exploring how to package opinionated plugin packs for specific workflows (e.
 
 ## Learnings & gotchas
 
-Collection of practical tips I've learnt as I go and gotchas to watch out for. See [LEARNINGS_AND_GOTCHAS.md](LEARNINGS_AND_GOTCHAS.md) for the full list.
-
-| Topic | Summary |
-|-------|---------|
-| [Skills in cloud sessions](LEARNINGS_AND_GOTCHAS.md#skills-are-not-available-in-cloudautonomous-sessions-unless-committed-to-the-repo) | Project-scope your skills if you want them available in cloud-based autonomous sessions — user-level skills live on your machine and won't be cloned |
-| [Private repo access for Claude Code web](LEARNINGS_AND_GOTCHAS.md#granting-claude-code-web-access-to-a-private-github-repo) | OAuth connection alone isn't enough — you must also grant access via https://github.com/apps/claude/installations/select_target |
-| [Agent SDK billing moves to plan-based (June 2025)](LEARNINGS_AND_GOTCHAS.md#agent-sdk-billing-is-moving-to-plan-based-from-june-15-2025) | From 15 Jun 2025 you can use your Claude plan instead of a separate API key for cloud agents — migrate to get a consistent local/cloud auth pattern |
-| [No visual browser review in Claude Code web](LEARNINGS_AND_GOTCHAS.md#visual-browser-review-is-not-available-in-claude-code-web) | Chrome/agent-browser is blocked in the web environment — do UI validation locally in the CLI or desktop app instead |
-| [Fable 5 can build non-trivial apps end-to-end in one session](LEARNINGS_AND_GOTCHAS.md#fable-5-is-capable-enough-to-build-non-trivial-apps-end-to-end-in-a-single-session) | Built a fully functional personal wiki from ~500 articles in ~10 mins |
-| [Autonomous sessions are structurally more token-hungry](LEARNINGS_AND_GOTCHAS.md#autonomous-sessions-are-structurally-more-token-hungry-than-interactive-ones) | No human checkpoints + greater parallel sub-agent spawning means consumption compounds fast — set conservative scope and be even more explicit about what not to do |
-| [Model and effort level compound on longer tasks](LEARNINGS_AND_GOTCHAS.md#model-and-effort-level-compound-significantly-on-longer-tasks) | Opus/xhigh vs Sonnet/low creates a very wide cost range with no pre-task tooling to guide the choice — default conservative and escalate only if quality is insufficient |
-| [Significant gap in pre-task cost visibility](LEARNINGS_AND_GOTCHAS.md#significant-gap-in-pre-task-cost-visibility) | No way to estimate cost or whether a task fits within plan limits before running — actively investigating; early approach using post-session data to build predictions: github.com/CodeSarthak/tarmac |
-| [Write incrementally on longer tasks](LEARNINGS_AND_GOTCHAS.md#write-incrementally-on-longer-tasks-to-survive-budget-limits) | Commit work frequently so budget limits leave you with recoverable checkpoints — in Claude Code web, instruct the agent to raise a PR before it expects to hit limits |
-| [TDD and testing patterns not yet reliable for autonomous sessions](LEARNINGS_AND_GOTCHAS.md#tdd-and-testing-patterns-are-not-yet-reliable-for-autonomous-sessions) | TDD adherence is patchy without explicit prompting — especially for front-end changes. agent-browser post-build visual validation is the reliable fallback. Continue investigating guardrails needed for higher-stakes autonomous workflows |
-| [Architecture and docs files often skipped without explicit instruction](LEARNINGS_AND_GOTCHAS.md#architecture-and-documentation-files-are-often-skipped-without-explicit-instruction) | Agents skip ARCHITECTURE*.md and README files unless explicitly told to read them — adding a dedicated CLAUDE.md instruction appears to fix this; warrants further experimentation |
-| [Claude defaults to its own memory folders over project .md files](LEARNINGS_AND_GOTCHAS.md#claude-defaults-to-writing-memory-into-its-own-hidden-folders-rather-than-project-md-files) | Claude consistently writes session context to `~/.claude/projects/.../memory/` rather than visible project docs — less transparent, not version-controlled. Exploring a CLAUDE.md instruction to block this pattern |
-| [Refactoring and simplification require intentional triggering](LEARNINGS_AND_GOTCHAS.md#refactoring-and-simplification-require-intentional-triggering) | Agents quietly accumulate debt across sessions — global variables instead of parameters, duplicated logic, design drift. Needs explicit CLAUDE.md patterns and a session-close refactor checkpoint to counter it |
-| [Skills as orchestration layer for personal productivity apps](LEARNINGS_AND_GOTCHAS.md#skills-as-orchestration-layer-for-personal-productivity-apps) | Claude Code skills work well as orchestration for multi-step personal workflows — markdown outputs, schedulable, low overhead to extend. Main fragility: no structured failure handling or recovery mid-skill |
+Practical tips and gotchas collected as I go. See [LEARNINGS_AND_GOTCHAS.md](LEARNINGS_AND_GOTCHAS.md) for the full list with detail.
 
 ## OpenCode
 
