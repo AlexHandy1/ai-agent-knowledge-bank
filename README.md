@@ -31,6 +31,7 @@ For guidance on how to instruct agents to use these skills together, see the [`C
 | [daily-summary](skills/daily-summary/SKILL.md) | `/daily-summary` | Pulls Granola meeting notes and writes a dated daily summary with action items | Custom |
 | [daily-plan](skills/daily-plan/SKILL.md) | `/daily-plan` | Builds the next day's `to_do_DDMMYYYY.md` from unfinished tasks and meeting actions | Custom |
 | [grill-me](skills/grill-me/SKILL.md) | `/grill-me` | Stress-tests a plan by interviewing you until reaching shared understanding | [Matt Pocock](https://github.com/mattpocock/skills) |
+| [prototype](skills/prototype/SKILL.md) | `/prototype` | Builds throwaway code to sanity-check a state model or UI direction before real implementation | [Matt Pocock](https://github.com/mattpocock/skills), with some of my minor customisations added |
 | [tdd](skills/tdd/SKILL.md) | `/tdd` | Red-green-refactor TDD workflow with vertical slices | [Matt Pocock](https://github.com/mattpocock/skills) |
 | [testing](skills/testing/SKILL.md) | `/testing` | Test patterns, factories, and anti-patterns for behaviour-driven tests | [Gidi Morris](https://github.com/gmmorris/xp-and-lean-agent-specification) |
 | [agent-browser](skills/agent-browser/SKILL.md) | `/agent-browser` | Browser automation CLI for AI agents via CDP | [Vercel Labs](https://www.skills.sh/vercel-labs/agent-browser/agent-browser) |
