@@ -20,6 +20,7 @@ A collection of practical tips I've picked up along the way and gotchas to watch
 | [Skills as orchestration layer for personal productivity apps](#skills-as-orchestration-layer-for-personal-productivity-apps) | Claude Code skills work well as orchestration for multi-step personal workflows — markdown outputs, schedulable, low overhead to extend. Main fragility: no structured failure handling |
 | [Artifact-design skill for internal technical communication](#artifact-design-skill-for-internal-technical-communication) | Promising early results using /artifact-design to produce polished, self-contained HTML artifacts for communicating technical concepts and designs internally |
 | [claude-api skill dumps all docs when language can't be inferred](#claude-api-skill-dumps-all-language-docs-when-it-cant-infer-the-project-language) | With no .py/.ts/etc. source files yet in the repo, the skill's language-detection fallback silently injected every language's reference docs (~309k tokens) instead of asking which language to show |
+| [Custom subagents + skill orchestration for parallel research](#custom-subagents--skill-orchestration-for-parallel-research) | Early encouraging result: a project `.claude/agents/` subagent doing read-only research, fanned out in parallel and orchestrated by a skill that serializes writes, cut wall-clock time with no correctness issues |
 
 ---
 
@@ -218,3 +219,13 @@ The `/claude-api` skill normally loads just one language's reference doc based o
 **Root cause:** the "language can't be inferred" fallback is supposed to prompt the user to pick a language, but the tool-result content included everything regardless — a known rough edge in the skill.
 
 **Practical implication:** in a repo without source files yet (e.g. very early in a project, before any code is written), state the intended language explicitly before invoking `/claude-api`, or skip re-invoking the skill and just proceed with that language's conventions directly.
+
+---
+
+## Custom subagents + skill orchestration for parallel research
+
+Early encouraging result using [project-scoped subagents](https://code.claude.com/docs/en/sub-agents): a `.claude/agents/` subagent restricted to read-only tools, fanned out in parallel for the research/lookup portion of a batch task, with a skill orchestrating the fan-out and then performing any writes itself, serially, afterward.
+
+Splitting on read-vs-write (rather than one full-flow agent per item) avoided race conditions between concurrent items while still parallelizing the actual bottleneck. Restricting the subagent's `tools:` frontmatter made the "read-only" boundary structural rather than just a prompt instruction.
+
+**Status:** One small-N test so far — promising, worth reusing for similar batch workflows.
