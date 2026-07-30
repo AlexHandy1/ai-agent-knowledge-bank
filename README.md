@@ -28,6 +28,8 @@ For guidance on how to instruct agents to use these skills together, see the [`C
 |-------|---------|-------------|--------|
 | [plan-recap](skills/plan-recap/SKILL.md) | `/plan-recap` | Reads planning docs and produces a concise session briefing | Custom |
 | [summarise-session](skills/summarise-session/SKILL.md) | `/summarise-session` | Writes a structured `WORK_SUMMARY_DDMMYY.md` from the current session | Custom |
+| [create-prd](skills/create-prd/SKILL.md) | `/create-prd` | Creates a Product Requirements Document covering problem, personas, user stories, and technical slices | Custom, influenced by [cexll/myclaude](https://www.skills.sh/cexll/myclaude/product-requirements) |
+| [create-technical-spec](skills/create-technical-spec/SKILL.md) | `/create-technical-spec` | Creates a detailed, implementable technical spec for a single slice of work | Custom, influenced by [github/awesome-copilot](https://www.skills.sh/github/awesome-copilot/create-specification) |
 | [daily-summary](skills/daily-summary/SKILL.md) | `/daily-summary` | Pulls Granola meeting notes and writes a dated daily summary with action items | Custom |
 | [daily-plan](skills/daily-plan/SKILL.md) | `/daily-plan` | Builds the next day's `to_do_DDMMYYYY.md` from unfinished tasks and meeting actions | Custom |
 | [grill-me](skills/grill-me/SKILL.md) | `/grill-me` | Stress-tests a plan by interviewing you until reaching shared understanding | [Matt Pocock](https://github.com/mattpocock/skills) |
@@ -48,6 +50,8 @@ For guidance on how to instruct agents to use these skills together, see the [`C
 | [summarise-session](skills/summarise-session/SKILL.md) | `/summarise-session` | Reviews the current conversation and writes a structured summary to a `WORK_SUMMARY_DDMMYY.md` file |
 | [daily-summary](skills/daily-summary/SKILL.md) | `/daily-summary` | Pulls today's Granola meeting notes and writes a dated daily summary with consolidated action items |
 | [daily-plan](skills/daily-plan/SKILL.md) | `/daily-plan` | Builds the next working day's `to_do_DDMMYYYY.md` by carrying over unfinished tasks and pulling in meeting actions |
+| [create-prd](skills/create-prd/SKILL.md) | `/create-prd` | Produces a PRD (problem, personas, user stories, technical slices) ahead of technical spec work — an interview scoped only to filling template gaps, not a plan stress-test (that's `/grill-me`) |
+| [create-technical-spec](skills/create-technical-spec/SKILL.md) | `/create-technical-spec` | Produces one implementable technical spec for a single slice of work, precise enough for an agent with no other context to build from |
 
 ## Skills from others
 
