@@ -1,6 +1,6 @@
 Start each session by running the /plan-recap skill to understand the project goal and status.
 
-Always look for and read any ARCHITECTURE*.md files or README files across the project (including in subdirectories and modules), and review the `docs/` directory if one exists (`status_docs/` for planning and session notes, `prds/` for product requirements, `specs/` for technical specs, `decisions/` for ADRs) — make sure you review documentation and understand the codebase before you proceed.
+Always read `ARCHITECTURE.md` at the repo root first if it exists — it should be the current, whole-system map (components, request flow, deploy flow, what's live vs. deferred) pointing to the ADR/spec for any decision's full reasoning, not restating it. Also read README files across the project (including in subdirectories and modules), and review the `docs/` directory if one exists (`status_docs/` for planning and session notes, `prds/` for product requirements, `specs/` for technical specs, `decisions/` for ADRs) — make sure you review documentation and understand the codebase before you proceed. If no `ARCHITECTURE.md` exists once there's a real system to describe (more than a single component), create one before closing the session, same as the README rule below. Keep it current when a change alters what it describes (new component, changed flow, a requirement moving from deferred to built).
 
 For any new feature or project planning, run /grill-me to stress-test the plan before building. Do not run this when operating autonomously.
 
