@@ -21,6 +21,7 @@ A collection of practical tips I've picked up along the way and gotchas to watch
 | [Artifact-design skill for internal technical communication](#artifact-design-skill-for-internal-technical-communication) | Promising early results using /artifact-design to produce polished, self-contained HTML artifacts for communicating technical concepts and designs internally |
 | [claude-api skill dumps all docs when language can't be inferred](#claude-api-skill-dumps-all-language-docs-when-it-cant-infer-the-project-language) | With no .py/.ts/etc. source files yet in the repo, the skill's language-detection fallback silently injected every language's reference docs (~309k tokens) instead of asking which language to show |
 | [Custom subagents + skill orchestration for parallel research](#custom-subagents--skill-orchestration-for-parallel-research) | Early encouraging result: a project `.claude/agents/` subagent doing read-only research, fanned out in parallel and orchestrated by a skill that serializes writes, cut wall-clock time with no correctness issues |
+| [Spec-driven development pays off mainly in fully autonomous mode](#spec-driven-development-pays-off-mainly-in-fully-autonomous-mode) | In a co-pilot/steward pattern, a highly detailed spec (e.g. from `/grill-me`) doesn't drive the expected efficiency gains — ends up debated and expanded live anyway, especially when design thinking is meant to evolve during the build |
 
 ---
 
@@ -229,3 +230,17 @@ Early encouraging result using [project-scoped subagents](https://code.claude.co
 Splitting on read-vs-write (rather than one full-flow agent per item) avoided race conditions between concurrent items while still parallelizing the actual bottleneck. Restricting the subagent's `tools:` frontmatter made the "read-only" boundary structural rather than just a prompt instruction.
 
 **Status:** One small-N test so far — promising, worth reusing for similar batch workflows.
+
+---
+
+## Spec-driven development pays off mainly in fully autonomous mode
+
+The expectation was that a highly detailed spec (e.g. produced by `/grill-me`) would drive significant efficiency gains by front-loading decisions before the build starts. In practice this only holds up when working in a fully autonomous pattern, where the agent runs the spec through to completion without a human steering mid-build.
+
+In a more co-pilot/steward style of working — where the intent is to stay closely involved in agentic engineering rather than hand off and check back later — the detailed spec doesn't produce the same payoff. Points from the spec end up getting re-debated and expanded live during the build anyway, particularly when part of the goal is to let design thinking develop *as* the build progresses rather than be fully resolved up front. The upfront spec-writing cost is paid, but the expected downstream efficiency doesn't materialise, because the human is intentionally still in the design loop.
+
+A related, separate cost: keeping documentation (specs, ADRs, architecture docs) consistent with the code over time has a real ongoing cost even with agent help — it doesn't fully disappear just because an agent can update docs quickly. This points to context management as the area to improve, rather than spec detail: e.g. lighter-weight specs for co-pilot sessions, deferring heavy spec investment to genuinely autonomous runs, and finding ways to keep an agent's working context current without a full documentation-sync pass every session.
+
+**Practical implication:** Match spec detail to work mode. For fully autonomous sessions, invest in a detailed `/grill-me`-style spec upfront. For co-pilot/steward sessions where design is meant to evolve during the build, a lighter spec is likely sufficient — the heavy detail will be renegotiated live regardless.
+
+**Status:** Open area. Worth experimenting with lighter-weight spec formats for co-pilot sessions, and with context management approaches (e.g. incremental context updates vs. full doc re-sync) that reduce the ongoing cost of keeping documentation current.
