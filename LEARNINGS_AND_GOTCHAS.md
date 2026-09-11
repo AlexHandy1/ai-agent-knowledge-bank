@@ -24,6 +24,8 @@ A collection of practical tips I've picked up along the way and gotchas to watch
 | [Spec-driven development pays off mainly in fully autonomous mode](#spec-driven-development-pays-off-mainly-in-fully-autonomous-mode) | In a co-pilot/steward pattern, a highly detailed spec (e.g. from `/grill-me`) doesn't drive the expected efficiency gains — ends up debated and expanded live anyway, especially when design thinking is meant to evolve during the build |
 | [OpenRouter routing doesn't guarantee lowest price unless you set a strategy](#openrouter-routing-doesnt-guarantee-lowest-price-unless-you-set-a-strategy) | Default routing balances low price against high uptime — it will not always pick the cheapest provider/quote for a model. Set the routing strategy explicitly if you want bounded/predictable cost |
 | [Claude Code web AI workflows need extra infra setup](#claude-code-web-ai-workflows-need-extra-infra-setup) | Beyond the repo: a separate API key per external service (e.g. OpenRouter), an allowed-domains list (e.g. openrouter.ai), and awareness that the local CLI can now push workflows back to the cloud once started — be intentional about whether you want that |
+| [Agent flow design has inertia toward the happy path](#agent-flow-design-has-inertia-toward-the-happy-path) | Model shows strong pull toward sequential, single-path flows unless explicitly pushed toward flexibility/branching — don't overfit agent flow design to the happy path |
+| [Claude Code doesn't reach for correct domain models without explicit guidance](#claude-code-doesnt-reach-for-correct-domain-models-without-explicit-guidance) | Proposed an issue-scoped contractors table needing per-issue duplication/claiming before the user pointed out a many-to-many join table was the right shape — map relationships out explicitly in spec/prototyping rather than trusting default instincts |
 
 ---
 
@@ -268,3 +270,19 @@ Getting a Claude Code web AI workflow to run effectively takes more than pointin
 **Practical implication:** Budget setup time for keys and domain allow-listing before expecting a web workflow to work end-to-end, and decide up front whether local→cloud handoff is desired for a given workflow.
 
 **Related:** [[Visual browser review is not available in Claude Code web]], [[Granting Claude Code web access to a private GitHub repo]]
+
+---
+
+## Agent flow design has inertia toward the happy path
+
+When designing or building an agent's decision flow, there's a strong pull toward a sequential, single-path shape — even when the system prompt explicitly says "you decide the order, not every case needs every step." Observed twice in the same prototype: a first cut hard-coded per-turn prompts and a per-artifact-kind branch structure that only fit the one scenario being tested, and had to be rewritten to a genuinely order-free design once reviewed against the other paths it needed to support (triage-only, needs-info, rejection re-entry). The underlying model then showed the same bias at runtime — given a free "decide what this issue needs" prompt, it fired several tools in one round as if executing a fixed pipeline rather than reasoning step-by-step, missing a required step in the process.
+
+**Practical implication:** Treat "handles the happy path" as an incomplete success signal, for both flow design and prompt design. Explicitly enumerate the other cases/branches the flow needs to support before considering a design done, and test at least one clearly divergent path (not just a second happy-path variant) before trusting flexible/agent-decided ordering to actually hold up.
+
+---
+
+## Claude Code doesn't reach for correct domain models without explicit guidance
+
+While adding a "preferred contractor" feature to an existing prototype, the first proposed schema change kept contractors scoped to a single issue — either duplicating a contractor's row per issue, or having an issue "claim" a pre-seeded contractor exclusively. The user caught this: a real landlord will reuse the same contractor across many issues over time, so the correct shape was a global `contractors` table plus an `issue_contractors` join table for the many-to-many relationship. The instinct to reach for the simpler, more locally-scoped structure wasn't wrong for the narrow feature being asked for — it just didn't hold up against the domain the feature actually sits inside.
+
+**Practical implication:** When a change touches a table/entity that represents a real-world thing (a contractor, a customer, a location), explicitly ask "does this need to support one-to-many or many-to-many with what it's about to relate to?" before proposing a schema, rather than defaulting to whatever shape is smallest for the immediate feature. Worth building into spec-writing and early prototyping steps (e.g. `/grill-me`) as a standing question, not something to rely on the model to surface unprompted.
