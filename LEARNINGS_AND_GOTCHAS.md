@@ -26,6 +26,7 @@ A collection of practical tips I've picked up along the way and gotchas to watch
 | [Claude Code web AI workflows need extra infra setup](#claude-code-web-ai-workflows-need-extra-infra-setup) | Beyond the repo: a separate API key per external service (e.g. OpenRouter), an allowed-domains list (e.g. openrouter.ai), and awareness that the local CLI can now push workflows back to the cloud once started — be intentional about whether you want that |
 | [Agent flow design has inertia toward the happy path](#agent-flow-design-has-inertia-toward-the-happy-path) | Model shows strong pull toward sequential, single-path flows unless explicitly pushed toward flexibility/branching — don't overfit agent flow design to the happy path |
 | [Claude Code doesn't reach for correct domain models without explicit guidance](#claude-code-doesnt-reach-for-correct-domain-models-without-explicit-guidance) | Proposed an issue-scoped contractors table needing per-issue duplication/claiming before the user pointed out a many-to-many join table was the right shape — map relationships out explicitly in spec/prototyping rather than trusting default instincts |
+| [Sonnet 5 over-reaches when writing technical specs](#sonnet-5-over-reaches-when-writing-technical-specs-with-the-create-technical-spec-skill) | Using the custom `/create-technical-spec` skill, Sonnet 5 added requirements and implementation details nobody asked for (e.g. scripting parts of an LLM evaluation process that weren't covered even in prototyping) — tighten the skill, or reconsider when specs are used at all |
 
 ---
 
@@ -286,3 +287,17 @@ When designing or building an agent's decision flow, there's a strong pull towar
 While adding a "preferred contractor" feature to an existing prototype, the first proposed schema change kept contractors scoped to a single issue — either duplicating a contractor's row per issue, or having an issue "claim" a pre-seeded contractor exclusively. The user caught this: a real landlord will reuse the same contractor across many issues over time, so the correct shape was a global `contractors` table plus an `issue_contractors` join table for the many-to-many relationship. The instinct to reach for the simpler, more locally-scoped structure wasn't wrong for the narrow feature being asked for — it just didn't hold up against the domain the feature actually sits inside.
 
 **Practical implication:** When a change touches a table/entity that represents a real-world thing (a contractor, a customer, a location), explicitly ask "does this need to support one-to-many or many-to-many with what it's about to relate to?" before proposing a schema, rather than defaulting to whatever shape is smallest for the immediate feature. Worth building into spec-writing and early prototyping steps (e.g. `/grill-me`) as a standing question, not something to rely on the model to surface unprompted.
+
+---
+
+## Sonnet 5 over-reaches when writing technical specs with the create-technical-spec skill
+
+Using the custom `/create-technical-spec` skill with Sonnet 5, the model repeatedly went beyond the scope it was given, adding requirements and implementation details that hadn't been discussed or agreed. Concrete example: it decided to script certain parts of the LLM evaluation process — something that wasn't covered in the PRD, the grilling, or even the prototyping step — and wrote it into the spec as if it were settled scope.
+
+The risk is that invented detail reads as a decision. Once it's in the spec, a downstream build session (especially an autonomous one) will implement it faithfully, so unrequested scope gets built rather than questioned.
+
+**Practical implication:** Two directions to try:
+- **Tighten the skill:** add explicit instructions that the spec may only contain requirements traceable to the PRD, the grill-me outcome, or prototype findings; anything else must be listed under "open questions / proposed additions" for the user to accept or reject rather than written as a requirement. Consider asking for a source reference per requirement.
+- **Review when specs are used at all:** for exploratory areas that haven't been prototyped (like the evaluation process here), skip the spec or mark them explicitly out of scope. See also [[Spec-driven development pays off mainly in fully autonomous mode]].
+
+**Status:** Single observation so far. Worth checking whether the over-reach recurs with other models or on other slices before rewriting the skill heavily.
