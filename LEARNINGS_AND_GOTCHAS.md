@@ -26,7 +26,7 @@ A collection of practical tips I've picked up along the way and gotchas to watch
 | [Claude Code web AI workflows need extra infra setup](#claude-code-web-ai-workflows-need-extra-infra-setup) | Beyond the repo: a separate API key per external service (e.g. OpenRouter), an allowed-domains list (e.g. openrouter.ai), and awareness that the local CLI can now push workflows back to the cloud once started — be intentional about whether you want that |
 | [Agent flow design has inertia toward the happy path](#agent-flow-design-has-inertia-toward-the-happy-path) | Model shows strong pull toward sequential, single-path flows unless explicitly pushed toward flexibility/branching — don't overfit agent flow design to the happy path |
 | [Claude Code doesn't reach for correct domain models without explicit guidance](#claude-code-doesnt-reach-for-correct-domain-models-without-explicit-guidance) | Proposed an issue-scoped contractors table needing per-issue duplication/claiming before the user pointed out a many-to-many join table was the right shape — map relationships out explicitly in spec/prototyping rather than trusting default instincts |
-| [Sonnet 5 over-reaches when writing technical specs](#sonnet-5-over-reaches-when-writing-technical-specs-with-the-create-technical-spec-skill) | Using the custom `/create-technical-spec` skill, Sonnet 5 added requirements and implementation details nobody asked for (e.g. scripting parts of an LLM evaluation process that weren't covered even in prototyping) — tighten the skill, or reconsider when specs are used at all |
+| [Sonnet 5 over-reaches when writing technical specs](#sonnet-5-over-reaches-when-writing-technical-specs-with-the-create-technical-spec-skill) | Using the custom `/create-technical-spec` skill, Sonnet 5 added requirements and implementation details not discussed (e.g. scripting parts of an LLM evaluation process that weren't covered even in prototyping) — tighten the skill, or reconsider contexts for when specs are used |
 
 ---
 
@@ -299,5 +299,3 @@ The risk is that invented detail reads as a decision. Once it's in the spec, a d
 **Practical implication:** Two directions to try:
 - **Tighten the skill:** add explicit instructions that the spec may only contain requirements traceable to the PRD, the grill-me outcome, or prototype findings; anything else must be listed under "open questions / proposed additions" for the user to accept or reject rather than written as a requirement. Consider asking for a source reference per requirement.
 - **Review when specs are used at all:** for exploratory areas that haven't been prototyped (like the evaluation process here), skip the spec or mark them explicitly out of scope. See also [[Spec-driven development pays off mainly in fully autonomous mode]].
-
-**Status:** Single observation so far. Worth checking whether the over-reach recurs with other models or on other slices before rewriting the skill heavily.
