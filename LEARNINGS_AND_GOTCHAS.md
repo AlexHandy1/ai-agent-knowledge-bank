@@ -27,6 +27,8 @@ A collection of practical tips I've picked up along the way and gotchas to watch
 | [Agent flow design has inertia toward the happy path](#agent-flow-design-has-inertia-toward-the-happy-path) | Model shows strong pull toward sequential, single-path flows unless explicitly pushed toward flexibility/branching — don't overfit agent flow design to the happy path |
 | [Claude Code doesn't reach for correct domain models without explicit guidance](#claude-code-doesnt-reach-for-correct-domain-models-without-explicit-guidance) | Proposed an issue-scoped contractors table needing per-issue duplication/claiming before the user pointed out a many-to-many join table was the right shape — map relationships out explicitly in spec/prototyping rather than trusting default instincts |
 | [Sonnet 5 over-reaches when writing technical specs](#sonnet-5-over-reaches-when-writing-technical-specs-with-the-create-technical-spec-skill) | Using the custom `/create-technical-spec` skill, Sonnet 5 added requirements and implementation details not discussed (e.g. scripting parts of an LLM evaluation process that weren't covered even in prototyping) — tighten the skill, or reconsider contexts for when specs are used |
+| [Variable performance via OpenRouter](#variable-performance-via-openrouter) | Mercury model showed opaque performance changes via OpenRouter, including an unexpected rate limit appearing — may need to dig deeper into routing logic to diagnose/handle |
+| [Sonnet struggles with wide refactoring without highly specific, repeated direction](#sonnet-struggles-with-wide-refactoring-without-highly-specific-repeated-direction) | Anchors extremely heavily on existing patterns in a system, which limits its ability to propose or execute broader refactors unless explicitly and repeatedly redirected |
 
 ---
 
@@ -299,3 +301,23 @@ The risk is that invented detail reads as a decision. Once it's in the spec, a d
 **Practical implication:** Two directions to try:
 - **Tighten the skill:** add explicit instructions that the spec may only contain requirements traceable to the PRD, the grill-me outcome, or prototype findings; anything else must be listed under "open questions / proposed additions" for the user to accept or reject rather than written as a requirement. Consider asking for a source reference per requirement.
 - **Review when specs are used at all:** for exploratory areas that haven't been prototyped (like the evaluation process here), skip the spec or mark them explicitly out of scope. See also [[Spec-driven development pays off mainly in fully autonomous mode]].
+
+---
+
+## Variable performance via OpenRouter
+
+Observed opaque, unexplained performance changes when using the Mercury model through OpenRouter — including an unexpected rate limit appearing with no clear trigger. The cause isn't yet understood; it may be related to how OpenRouter's routing logic selects providers under the hood (see also [[OpenRouter routing doesn't guarantee lowest price unless you set a strategy]]), but this hasn't been confirmed.
+
+**Practical implication:** Don't assume stable throughput/rate limits when routing a model through OpenRouter, even for a model that has been reliable before. May need to go deeper on routing logic/provider selection to diagnose and handle this — e.g. pinning a specific provider rather than relying on default routing.
+
+**Status:** Open area — root cause not yet identified. Worth tracking whether this recurs with Mercury specifically or appears with other models too.
+
+---
+
+## Sonnet struggles with wide refactoring without highly specific, repeated direction
+
+When asked to perform a wider refactor, Sonnet 5 anchors extremely heavily on the existing patterns already present in the system — it tends to extend or replicate what's there rather than stepping back to propose a genuinely different structure. This holds even when the task is explicitly framed as a refactor rather than an incremental addition.
+
+Getting a broader restructuring appears to require highly specific, repeated direction — general instructions to "refactor this more broadly" or "simplify the architecture" aren't enough on their own to overcome the pull toward existing patterns.
+
+**Practical implication:** For non-trivial refactors, don't expect the model to independently identify or propose a structurally different approach. Be explicit and concrete about the target shape, and expect to repeat/reinforce the direction rather than giving it once. Related to the general pattern in [[Refactoring and simplification require intentional triggering]], but specifically about resistance to *wide* structural change even when refactoring is already the explicit goal.
