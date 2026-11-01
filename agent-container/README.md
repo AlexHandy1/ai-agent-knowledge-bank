@@ -90,6 +90,12 @@ docker compose up -d    # brings the same container back
 docker compose exec agent bash
 ```
 
+## Known issues
+
+- **Chrome/agent-browser** — need to find a better way to set this up within the container.
+- **Local port hosting (5057)** — doesn't work outside the current container setup.
+- **Build issues across envs** — Python version/torch mismatches.
+
 ## Known limitations (first pass)
 
 - No network allowlist/proxy — the container has open egress. Fine for a solo-dev box per the sandboxing report, but revisit before this setup is reused somewhere more exposed.
