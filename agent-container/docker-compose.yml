@@ -1,0 +1,13 @@
+services:
+  agent:
+    build: .
+    volumes:
+      - claude-credentials:/home/agent/.claude
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    command: ["sleep", "infinity"]
+
+volumes:
+  claude-credentials:
+    external: true

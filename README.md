@@ -78,6 +78,10 @@ For guidance on how to instruct agents to use these skills together, see the [`C
 
 I'm exploring how to package opinionated plugin packs for specific workflows (e.g. data analysis) — bringing together the right skills, agents, and scaffolding in one place.
 
+## Agent container
+
+[agent-container](agent-container/README.md) is an early draft of a container-based sandbox for running agents fully autonomously on local machine with a human/manual trigger or brief - plan to pair with GitHub Action workflows for auto-triggered workflows (e.g. nightly research summary).
+
 ## Learnings & gotchas
 
 Practical tips and gotchas collected as I go. See [LEARNINGS_AND_GOTCHAS.md](LEARNINGS_AND_GOTCHAS.md) for the full list with detail.
