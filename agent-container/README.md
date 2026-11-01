@@ -1,10 +1,8 @@
 # agent-sandbox
 
-A persistent Docker container for running Claude Code (Pro subscription, not API key) in `--dangerously-skip-permissions` mode against cloned repos. First proven end-to-end against [nature-quest](../../nature-quest); the steps below generalize to any other repo. It's a separate box, environment, and filesystem from the host Mac; isolation comes from that separation (plus a non-root user), not from permission prompts, per the Tier 1 pattern in `../reports/Autonomous Claude agent sandboxing.md`.
+A persistent Docker container for running Claude Code (Pro subscription, not API key) autonomously against cloned repos. It's a separate box, environment, and filesystem from the host Mac; isolation comes from that separation (plus a non-root user), not from permission prompts.
 
 Unlike a disposable per-task container, this one is meant to be kept running and built up over time — started and stopped as needed, with tasks sometimes left running unattended (e.g. overnight). Git is the source of truth for code, not the container's filesystem: if the container ever gets corrupted or needs a clean slate, it's fine to destroy and rebuild it, because the real state lives in the target repo, pushed and pulled as usual.
-
-This is a first pass, intentionally kept in `networking-system` for now. Once it's working reliably it'll move to `ai-agent-knowledge-bank` as a general-purpose setup, not specific to any one project.
 
 ## First-time setup
 
@@ -35,8 +33,8 @@ Run `/login`, complete the OAuth flow in your browser, then exit (`/exit`). If t
 
 ```bash
 git config --global credential.helper store
-git config --global user.name "Alex Handy (agent-sandbox)"
-git config --global user.email "alex.handy.research@gmail.com"
+git config --global user.name "Your Name (agent-sandbox)"
+git config --global user.email "your-email@example.com"
 ```
 
 `user.name`/`user.email` just set the commit author — they don't affect Claude's `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>` trailer, which Claude Code still adds to commit messages it makes, same as any other session.
@@ -69,7 +67,7 @@ The first `git push` to a private repo (or any repo the container doesn't yet ha
 **Run Claude Code autonomously:**
 
 ```bash
-claude --dangerously-skip-permissions
+claude
 ```
 
 **Make a change and open a PR**, same as any normal git workflow:
