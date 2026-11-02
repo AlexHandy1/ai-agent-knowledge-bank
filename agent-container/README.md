@@ -82,6 +82,16 @@ git push -u origin <branch-name>
 
 `git push` prints a direct "Create a pull request" URL for the branch — open it in your Mac's browser to open the PR. (`gh` CLI isn't installed in the image, so this is the path for now.)
 
+**Check in on a running container** (e.g. while an overnight task is still going) — open an interactive shell without disturbing what's already running inside:
+
+```bash
+docker exec -it agent-sandbox-agent-1 bash
+```
+
+This attaches a second shell alongside whatever `docker compose exec agent bash` session (or unattended `claude` run) is already active, so you can poke around — read files with `nano`, check `git status`, tail logs — without killing the original session. Exit with `exit` or `Ctrl-D`; the container and its other session keep running.
+
+**Scoping Claude's controls to just this container** — further customisation (beyond what's baked into the image) is done by editing `.claude/settings.json` inside the container, which only affects Claude Code sessions running there, not your account-wide settings on the host. For example, if your account has claude.ai connectors configured (e.g. a Slack connector with write access), you may not want a container running autonomous/unattended tasks to have that same access by default. Setting `"disableClaudeAiConnectors": true` in the container's `.claude/settings.json` blocks those inherited connectors in this context, without changing anything for your normal host-side Claude Code use. To block just one connector instead of all of them, add its name to `deniedMcpServers` (e.g. `"claude.ai Slack"`). Note this only covers connectors Claude Code fetches itself (terminal/CLI sessions like this container's) — it doesn't apply to connectors a cloud session or the desktop app's in-process sessions receive directly from the host.
+
 **Stop / restart** — the container and everything in it (clones, venvs, cached git credentials) persists as long as the container exists, independent of whether it's running:
 
 ```bash
@@ -95,6 +105,8 @@ docker compose exec agent bash
 - **Chrome/agent-browser** — need to find a better way to set this up within the container.
 - **Local port hosting (5057)** — doesn't work outside the current container setup.
 - **Build issues across envs** — Python version/torch mismatches.
+- **Can't copy text from within a Claude session inside the container** — possibly a Terminal.app issue rather than the container itself.
+- **Claude lacks some permissions to run auto-updates** inside the container.
 
 ## Known limitations (first pass)
 

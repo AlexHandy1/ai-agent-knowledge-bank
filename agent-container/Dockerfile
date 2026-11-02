@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-venv \
     git \
     ca-certificates \
+    nano \
     && rm -rf /var/lib/apt/lists/*
 
 # Claude Code refuses --dangerously-skip-permissions when run as root, so
