@@ -1,4 +1,4 @@
-# agent-sandbox
+# agent-container
 
 A persistent Docker container for running Claude Code (Pro subscription, not API key) autonomously against cloned repos. It's a separate box, environment, and filesystem from the host Mac; isolation comes from that separation (plus a non-root user), not from permission prompts.
 
@@ -7,7 +7,7 @@ Unlike a disposable per-task container, this one is meant to be kept running and
 ## First-time setup
 
 ```bash
-cd agent-sandbox
+cd agent-container
 docker compose up -d
 ```
 
@@ -24,7 +24,7 @@ docker run --rm -v claude-credentials:/data alpine chown -R 1001:1001 /data
 The Pro OAuth token is stored on disk (`~/.claude/.credentials.json`) rather than in the OS keychain when running on Linux, so it survives in the `claude-credentials` volume independently of the container itself.
 
 ```bash
-docker compose exec agent claude
+docker exec -it agent-container-agent-1 claude
 ```
 
 Run `/login`, complete the OAuth flow in your browser, then exit (`/exit`). If the volume already has a valid token from a previous setup, this may just work without a fresh login.
@@ -33,7 +33,7 @@ Run `/login`, complete the OAuth flow in your browser, then exit (`/exit`). If t
 
 ```bash
 git config --global credential.helper store
-git config --global user.name "Your Name (agent-sandbox)"
+git config --global user.name "Your Name (agent-container)"
 git config --global user.email "your-email@example.com"
 ```
 
@@ -49,7 +49,7 @@ For each repo this container will work on, create a **fine-grained** GitHub PAT 
 
 ```bash
 docker compose up -d        # starts the container if it isn't already running
-docker compose exec agent bash
+docker exec -it agent-container-agent-1 bash
 ```
 
 **First time working with a given repo**, inside the container:
@@ -82,13 +82,13 @@ git push -u origin <branch-name>
 
 `git push` prints a direct "Create a pull request" URL for the branch — open it in your Mac's browser to open the PR. (`gh` CLI isn't installed in the image, so this is the path for now.)
 
-**Check in on a running container** (e.g. while an overnight task is still going) — open an interactive shell without disturbing what's already running inside:
+**Check in on a running container** (e.g. while an overnight task is still going) — open an additional interactive shell without disturbing what's already running inside:
 
 ```bash
-docker exec -it agent-sandbox-agent-1 bash
+docker exec -it agent-container-agent-1 bash
 ```
 
-This attaches a second shell alongside whatever `docker compose exec agent bash` session (or unattended `claude` run) is already active, so you can poke around — read files with `nano`, check `git status`, tail logs — without killing the original session. Exit with `exit` or `Ctrl-D`; the container and its other session keep running.
+This attaches a second shell alongside whatever other `docker exec` session (or unattended `claude` run) is already active, so you can poke around — read files with `nano`, check `git status`, tail logs — without killing the original session. Exit with `exit` or `Ctrl-D`; the container and its other session keep running.
 
 **Scoping Claude's controls to just this container** — further customisation (beyond what's baked into the image) is done by editing `.claude/settings.json` inside the container, which only affects Claude Code sessions running there, not your account-wide settings on the host. For example, if your account has claude.ai connectors configured (e.g. a Slack connector with write access), you may not want a container running autonomous/unattended tasks to have that same access by default. Setting `"disableClaudeAiConnectors": true` in the container's `.claude/settings.json` blocks those inherited connectors in this context, without changing anything for your normal host-side Claude Code use. To block just one connector instead of all of them, add its name to `deniedMcpServers` (e.g. `"claude.ai Slack"`). Note this only covers connectors Claude Code fetches itself (terminal/CLI sessions like this container's) — it doesn't apply to connectors a cloud session or the desktop app's in-process sessions receive directly from the host.
 
@@ -97,8 +97,10 @@ This attaches a second shell alongside whatever `docker compose exec agent bash`
 ```bash
 docker compose stop     # stops the container, keeps its filesystem intact
 docker compose up -d    # brings the same container back
-docker compose exec agent bash
+docker exec -it agent-container-agent-1 bash
 ```
+
+**Warning: `docker compose down` deletes the container**, not just stops it — any work that only lives in the container's filesystem (uncommitted/unpushed changes, clones, venvs) is lost. Use `docker compose stop` for a normal pause; only use `down` when you intend to destroy and rebuild (git being the source of truth is what makes that safe).
 
 ## Known issues
 
